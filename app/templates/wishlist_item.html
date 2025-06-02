@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block title %}Amazon|Wishlist{% endblock %} {% load static %} {% block body %}
+<div class="container mt-3">
+        <div class="row">
+          {% for m in messages %}
+          <div class="alert alert-warning">{{m}}</div>
+          {% endfor %} 
+          {% for x in wishlist_item %}
+          <div class="col-md-3 mt-3">
+            <div class="card text-center" style="width: 15rem">
+              {% if x.productid.productimage_set.all %}
+              <img
+                src="{{x.productid.productimage_set.all.0.image.url}}"
+                class="card-img-top"
+                alt="{{x.productid.productname}}"
+                width="100px"
+                height="150px"
+              />
+              {% else %}
+              <p>Image not available</p>
+              {% endif %}
+
+              <div class="card-body">
+                <h5 class="card-title">{{x.productid.productname}}</h5>
+                <p class="card-text">{{x.productid.description}}</p>
+                <p class="card-text">{{x.productid.category}}</p>
+                <p class="card-text">Price:{{x.productid.price}}</p>
+                <a href="{% url 'productdetails' x.productid.productid %}" class="btn btn-primary">View More</a>
+                <a href="{% url 'removewishlist' x.productid.productid %}" class="btn btn-danger">Remove</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+{% endblock %}

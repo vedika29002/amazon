@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block title %}Amazon | Seller_Payment{% endblock %}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <h1>Seller Request Payment</h1>
+    <form method="post" action="{% url 'seller_payment' %}">
+      {% csrf_token %}
+      <input class="btn btn-danger" type="submit" value="Pay Now" />
+    </form>
+  </div>
+</div>
+{% endblock %}
